@@ -1,7 +1,8 @@
-package com.jamadev.brookchallenge
+package com.jamadev.brookchallenge.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.jamadev.brookchallenge.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
