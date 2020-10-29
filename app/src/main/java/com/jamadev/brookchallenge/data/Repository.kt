@@ -11,6 +11,7 @@ import com.google.android.gms.fitness.data.DataSource
 import com.google.android.gms.fitness.data.HealthDataTypes.TYPE_BLOOD_PRESSURE
 import com.google.android.gms.fitness.data.HealthFields.*
 import com.google.android.gms.fitness.request.DataReadRequest
+import com.jamadev.brookchallenge.base.Constants.DAYS_OF_DATA
 import com.jamadev.brookchallenge.base.Constants.GOOGLE_FIT_PERMISSIONS_REQUEST_CODE
 import com.jamadev.brookchallenge.base.Constants.fitnessOptions
 import java.util.*
@@ -31,6 +32,7 @@ class Repository(private val context: Context) : RepositoryContract {
             .subscribe(bloodPressureSource)
             .addOnSuccessListener {
                 Log.d(TAG, "Yes we can")
+                createBloodPressureRecord(76f, 115f)
             }
     }
 
@@ -49,7 +51,7 @@ class Repository(private val context: Context) : RepositoryContract {
     override suspend fun getBloodPressureData(): List<Bucket> {
         val calendar = Calendar.getInstance()
         val endTime = calendar.timeInMillis
-        calendar.add(Calendar.DATE, -30)
+        calendar.add(Calendar.DATE, DAYS_OF_DATA)
         val startTime = calendar.timeInMillis
 
         val readRequest: DataReadRequest = DataReadRequest.Builder()
@@ -64,9 +66,9 @@ class Repository(private val context: Context) : RepositoryContract {
                 .addOnSuccessListener { response ->
                     // Use response data here
                     for (bucket in response.buckets) {
-                        Log.d(TAG, bucket.toString())
-                        Log.d(TAG, bucket.dataSets.size.toString())
-                        Log.d(TAG, bucket.dataSets[0].dataPoints.size.toString())
+                        //Log.d(TAG, bucket.toString())
+                        //Log.d(TAG, bucket.dataSets.size.toString())
+                        //Log.d(TAG, bucket.dataSets[0].dataPoints.size.toString())
                     }
                     Log.d(TAG, response.dataSets.toString())
                     Log.d(TAG, "OnSuccess()")
@@ -91,6 +93,8 @@ class Repository(private val context: Context) : RepositoryContract {
                 BLOOD_PRESSURE_MEASUREMENT_LOCATION_LEFT_UPPER_ARM
             )
             .build()
+
+        Log.d(TAG,bloodPressure.getValue(FIELD_BLOOD_PRESSURE_SYSTOLIC).toString())
         Log.d(TAG, "Yes")
     }
 

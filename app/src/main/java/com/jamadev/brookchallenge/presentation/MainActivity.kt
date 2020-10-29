@@ -44,7 +44,6 @@ class MainActivity : AppCompatActivity() {
         positiveButtonText = resources.getString(R.string.accept)
         negativeButtonText = resources.getString(R.string.do_it_later)
 
-        viewModel.storeBloodPressureData(76f, 115f)
     }
 
 
