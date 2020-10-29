@@ -32,8 +32,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         account = GoogleSignIn.getAccountForExtension(this, fitnessOptions)
-        repository  = Repository(this)
-        viewModel.setRepository(repository)
 
         viewModel.hasGoogleFitPermission.observe(this){
             if(!it) showAlertDialog() else viewModel.permissionHasGranted()
@@ -46,7 +44,26 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    override fun onPause() {
+        super.onPause()
+        viewModel.setRepository(null)
+        repository.onDestroy()
+    }
 
+    override fun onResume() {
+        super.onResume()
+        repository  = Repository(this)
+        viewModel.setRepository(repository)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == RESULT_OK) {
+            if (requestCode == Constants.GOOGLE_FIT_PERMISSIONS_REQUEST_CODE) {
+                viewModel.permissionHasGranted()
+            }
+        }
+    }
 
     private fun showAlertDialog(){
         val builder: AlertDialog.Builder = AlertDialog.Builder(this)
@@ -60,19 +77,6 @@ class MainActivity : AppCompatActivity() {
         dialog.show()
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == RESULT_OK) {
-            if (requestCode == Constants.GOOGLE_FIT_PERMISSIONS_REQUEST_CODE) {
-                viewModel.permissionHasGranted()
-            }
-        }
-    }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        viewModel.setRepository(null)
-        repository.onDestroy()
-    }
 
 }
