@@ -3,11 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/app_navigation.xml"
-    app:startDestination="@id/splashFragment">
-
+    app:startDestination="@id/bloodPressureListFragment">
     <fragment
-        android:id="@+id/splashFragment"
-        android:name="com.jamadev.brookchallenge.presentation.SplashFragment"
-        android:label="fragment_splash"
-        tools:layout="@layout/fragment_splash" />
+        android:id="@+id/bloodPressureListFragment"
+        android:name="com.jamadev.brookchallenge.presentation.BloodPressureListFragment"
+        android:label="fragment_blood_presure_list"
+        tools:layout="@layout/fragment_blood_presure_list" />
 </navigation>

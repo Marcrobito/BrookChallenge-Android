@@ -34,6 +34,9 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    buildFeatures {
+        dataBinding = true
+    }
 }
 
 dependencies {
@@ -50,13 +53,6 @@ dependencies {
     //Google Fit
     implementation 'com.google.android.gms:play-services-fitness:20.0.0'
     implementation 'com.google.android.gms:play-services-auth:18.1.0'
-
-    //Dagger2
-    implementation 'com.google.dagger:dagger:2.16'
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    kapt 'com.google.dagger:dagger-compiler:2.16'
-
-
 
     testImplementation 'junit:junit:4.13.1'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'

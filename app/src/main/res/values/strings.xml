@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">BrookChallenge</string>
+    <string name="permission_required">Permission Required</string>
+    <string name="permission_message">In order to get your data we need access to your google fit account</string>
+    <string name="accept">Accept</string>
+    <string name="cancel">Cancel</string>
+    <string name="do_it_later">Do it Later</string>
+    <string name="enable_google_fit">Enable google fit</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

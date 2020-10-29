@@ -1,21 +1,25 @@
 package com.jamadev.brookchallenge
 
 import android.app.Application
-import javax.inject.Singleton
+import android.content.res.Resources
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.jamadev.brookchallenge.base.Constants
 
-
-@Singleton
 class App:Application() {
-
-    private lateinit var component: AppComponent
+    companion object{
+        lateinit var resAccess: Resources
+    }
 
     override fun onCreate() {
         super.onCreate()
-        component = DaggerAppComponent.builder()
-            .build()
-        /*val i = Intent(this, RandomMealService::class.java)
-        startService(i)*/
+        resAccess = resources
+        val account = GoogleSignIn.getAccountForExtension(this, Constants.fitnessOptions)
+        if (GoogleSignIn.hasPermissions(account, Constants.fitnessOptions)){
+            /*val i = Intent(this, Service::class.java)
+                startService(i)*/
+        }
+
     }
 
-    fun getComponent() = component
+
 }
